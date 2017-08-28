@@ -5,7 +5,7 @@ export default class Correlation  {
      * @returns {number}
      */
     static calcDeterminationRank(fVector, sVector) {
-        return Math.pow(Correlation.calcPearsonRank(fVector, sVector), 2);
+        return Math.pow(Correlation.calcPearsonRank(fVector, sVector), 2) * 100;
     }
 
     /**
