@@ -4,8 +4,8 @@ export default class Correlation  {
      *
      * @returns {number}
      */
-    static calcDeterminationRank(fVector, sVector) {
-        return Math.pow(Correlation.calcPearsonRank(fVector, sVector), 2) * 100;
+    static determination(fVector, sVector) {
+        return Math.pow(Correlation.rank(fVector, sVector), 2);
     }
 
     /**
@@ -14,20 +14,20 @@ export default class Correlation  {
      * @param sVector
      * @returns {number}
      */
-    static calcPearsonRank(fVector, sVector) {
+    static rank(fVector, sVector) {
         if (fVector.length === 0 || sVector.length === 0 || fVector.length !== sVector.length) {
             return 0;
         }
 
-        const numeratorSum = Correlation.calcMultiplyVector(
-            Correlation.calcValueDifferenceAverage(fVector, Correlation.calcAverageValue(fVector)),
-            Correlation.calcValueDifferenceAverage(sVector, Correlation.calcAverageValue(sVector))
+        const numeratorSum = Correlation._calcMultiplyVector(
+            Correlation._calcValueDifferenceAverage(fVector, Correlation._calcAverageValue(fVector)),
+            Correlation._calcValueDifferenceAverage(sVector, Correlation._calcAverageValue(sVector))
         ).reduce((a, b) => a + b);
 
-        const diffAverageSquareSumFirst = Correlation.calcValueDifferenceAverageSquare(
-            fVector, Correlation.calcAverageValue(fVector)).reduce((a, b) => a + b),
-            diffAverageSquareSumSecond = Correlation.calcValueDifferenceAverageSquare(
-                sVector, Correlation.calcAverageValue(sVector)).reduce((a, b) => a + b);
+        const diffAverageSquareSumFirst = Correlation._calcValueDifferenceAverageSquare(
+            fVector, Correlation._calcAverageValue(fVector)).reduce((a, b) => a + b),
+            diffAverageSquareSumSecond = Correlation._calcValueDifferenceAverageSquare(
+                sVector, Correlation._calcAverageValue(sVector)).reduce((a, b) => a + b);
 
         const denominatorSum = Math.sqrt(diffAverageSquareSumFirst * diffAverageSquareSumSecond);
 
@@ -43,8 +43,8 @@ export default class Correlation  {
      * @param values
      * @returns {number}
      */
-    static calcAverageValue(values) {
-        Correlation.validateArray(values);
+    static _calcAverageValue(values) {
+        Correlation._validateArray(values);
         return values.reduce((a, b) => a + b) / values.length;
     }
 
@@ -54,7 +54,7 @@ export default class Correlation  {
      * @param average
      * @returns {number}
      */
-    static calcValueDifferenceAverage(values, average) {
+    static _calcValueDifferenceAverage(values, average) {
         if (!Array.isArray(values) || isNaN(average) || !average) {
             console.log(values);
             throw new TypeError;
@@ -67,7 +67,7 @@ export default class Correlation  {
      * @param fVector
      * @param sVector
      */
-    static calcMultiplyVector(fVector, sVector) {
+    static _calcMultiplyVector(fVector, sVector) {
         return fVector.map((element, index) => element * sVector[index])
     }
 
@@ -77,9 +77,9 @@ export default class Correlation  {
      * @param average
      * @returns {number}
      */
-    static calcValueDifferenceAverageSquare(values, average) {
+    static _calcValueDifferenceAverageSquare(values, average) {
         return Correlation
-            .calcValueDifferenceAverage(values, average)
+            ._calcValueDifferenceAverage(values, average)
             .map(element => Math.pow(element, 2));
     }
 
@@ -87,7 +87,7 @@ export default class Correlation  {
      *
      * @param values
      */
-    static validateArray(values) {
+    static _validateArray(values) {
         if (!Array.isArray(values)) {
             throw new TypeError;
         }

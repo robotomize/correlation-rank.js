@@ -20,15 +20,15 @@ var Correlation = function () {
     }
 
     (0, _createClass3.default)(Correlation, null, [{
-        key: "calcDeterminationRank",
+        key: "determination",
 
 
         /**
          *
          * @returns {number}
          */
-        value: function calcDeterminationRank(fVector, sVector) {
-            return Math.pow(Correlation.calcPearsonRank(fVector, sVector), 2) * 100;
+        value: function determination(fVector, sVector) {
+            return Math.pow(Correlation.rank(fVector, sVector), 2);
         }
 
         /**
@@ -39,20 +39,20 @@ var Correlation = function () {
          */
 
     }, {
-        key: "calcPearsonRank",
-        value: function calcPearsonRank(fVector, sVector) {
+        key: "rank",
+        value: function rank(fVector, sVector) {
             if (fVector.length === 0 || sVector.length === 0 || fVector.length !== sVector.length) {
                 return 0;
             }
 
-            var numeratorSum = Correlation.calcMultiplyVector(Correlation.calcValueDifferenceAverage(fVector, Correlation.calcAverageValue(fVector)), Correlation.calcValueDifferenceAverage(sVector, Correlation.calcAverageValue(sVector))).reduce(function (a, b) {
+            var numeratorSum = Correlation._calcMultiplyVector(Correlation._calcValueDifferenceAverage(fVector, Correlation._calcAverageValue(fVector)), Correlation._calcValueDifferenceAverage(sVector, Correlation._calcAverageValue(sVector))).reduce(function (a, b) {
                 return a + b;
             });
 
-            var diffAverageSquareSumFirst = Correlation.calcValueDifferenceAverageSquare(fVector, Correlation.calcAverageValue(fVector)).reduce(function (a, b) {
+            var diffAverageSquareSumFirst = Correlation._calcValueDifferenceAverageSquare(fVector, Correlation._calcAverageValue(fVector)).reduce(function (a, b) {
                 return a + b;
             }),
-                diffAverageSquareSumSecond = Correlation.calcValueDifferenceAverageSquare(sVector, Correlation.calcAverageValue(sVector)).reduce(function (a, b) {
+                diffAverageSquareSumSecond = Correlation._calcValueDifferenceAverageSquare(sVector, Correlation._calcAverageValue(sVector)).reduce(function (a, b) {
                 return a + b;
             });
 
@@ -72,9 +72,9 @@ var Correlation = function () {
          */
 
     }, {
-        key: "calcAverageValue",
-        value: function calcAverageValue(values) {
-            Correlation.validateArray(values);
+        key: "_calcAverageValue",
+        value: function _calcAverageValue(values) {
+            Correlation._validateArray(values);
             return values.reduce(function (a, b) {
                 return a + b;
             }) / values.length;
@@ -88,8 +88,8 @@ var Correlation = function () {
          */
 
     }, {
-        key: "calcValueDifferenceAverage",
-        value: function calcValueDifferenceAverage(values, average) {
+        key: "_calcValueDifferenceAverage",
+        value: function _calcValueDifferenceAverage(values, average) {
             if (!Array.isArray(values) || isNaN(average) || !average) {
                 console.log(values);
                 throw new TypeError();
@@ -106,8 +106,8 @@ var Correlation = function () {
          */
 
     }, {
-        key: "calcMultiplyVector",
-        value: function calcMultiplyVector(fVector, sVector) {
+        key: "_calcMultiplyVector",
+        value: function _calcMultiplyVector(fVector, sVector) {
             return fVector.map(function (element, index) {
                 return element * sVector[index];
             });
@@ -121,9 +121,9 @@ var Correlation = function () {
          */
 
     }, {
-        key: "calcValueDifferenceAverageSquare",
-        value: function calcValueDifferenceAverageSquare(values, average) {
-            return Correlation.calcValueDifferenceAverage(values, average).map(function (element) {
+        key: "_calcValueDifferenceAverageSquare",
+        value: function _calcValueDifferenceAverageSquare(values, average) {
+            return Correlation._calcValueDifferenceAverage(values, average).map(function (element) {
                 return Math.pow(element, 2);
             });
         }
@@ -134,8 +134,8 @@ var Correlation = function () {
          */
 
     }, {
-        key: "validateArray",
-        value: function validateArray(values) {
+        key: "_validateArray",
+        value: function _validateArray(values) {
             if (!Array.isArray(values)) {
                 throw new TypeError();
             }

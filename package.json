@@ -1,14 +1,16 @@
 {
-  "name": "pearson-correlation",
-  "version": "0.0.0",
+  "name": "correlation-rank",
+  "version": "0.1.0",
   "description": "Calculate pearson correlation rank",
   "main": "dist/index.js",
   "keywords": [
     "math",
     "correlation",
     "pearson",
-    "calculate",
-    "calc"
+    "linear-algebra",
+    "pearson-coefficient",
+    "pearson-correlation",
+    "correlation-tool"
   ],
   "author": "Ivanov Nikita <robotomize@gmail.com>",
   "license": "MIT",
@@ -22,9 +24,9 @@
   "bugs": {
     "url": "https://github.com/robotomize/metanol/issues"
   },
-  "homepage": "https://github.com/robotomize/metanol.git/#readme",
+  "homepage": "https://github.com/robotomize/correlation-rank.git/#readme",
   "directories": {
-    "test": "test"
+    "test": "tests"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

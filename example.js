@@ -1,3 +1,11 @@
-const Rank = require('./dist/index');
+const correlation = require('./dist/index');
 
-console.log(Rank.calcPearsonRank([1,2,3,4,5], [-5,25,10,20,100]));
+/**
+ * Correlation rank
+ */
+console.log(correlation.rank([1,2,3,4,5], [-5,25,10,20,100]));
+
+/**
+ * Determination rank
+ */
+console.log(correlation.determination([1,2,3,4,5], [-5,25,10,20,100]));
