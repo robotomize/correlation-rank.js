@@ -30,9 +30,17 @@ correlation.determination([], []);
 ```
 
 ## For a sample
-The first value is the correlation coefficient and the second coefficient of determination
+The first value is the correlation coefficient and the second coefficient of determination. 
 
-### 
+### Sample using correlation-rank
+```js
+import Correlation from 'correlation-rank'
+const correlation = require('./correlation-rank');
+
+correlation.rank([1,2,3,4,5], [-5,25,10,20,100]);
+correlation.determination([1,2,3,4,5], [-5,25,10,20,100]);
+
+```
 ```
 node example
 0.7949559026877182
