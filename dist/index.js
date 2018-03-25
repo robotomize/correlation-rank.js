@@ -1,14 +1,14 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _classCallCheck2 = require("babel-runtime/helpers/classCallCheck");
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = require("babel-runtime/helpers/createClass");
+var _createClass2 = require('babel-runtime/helpers/createClass');
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
@@ -20,7 +20,7 @@ var Correlation = function () {
     }
 
     (0, _createClass3.default)(Correlation, null, [{
-        key: "determination",
+        key: 'determination',
 
 
         /**
@@ -39,7 +39,7 @@ var Correlation = function () {
          */
 
     }, {
-        key: "rank",
+        key: 'rank',
         value: function rank(fVector, sVector) {
             if (fVector.length === 0 || sVector.length === 0 || fVector.length !== sVector.length) {
                 return 0;
@@ -72,7 +72,7 @@ var Correlation = function () {
          */
 
     }, {
-        key: "_calcAverageValue",
+        key: '_calcAverageValue',
         value: function _calcAverageValue(values) {
             Correlation._validateArray(values);
             return values.reduce(function (a, b) {
@@ -88,12 +88,16 @@ var Correlation = function () {
          */
 
     }, {
-        key: "_calcValueDifferenceAverage",
+        key: '_calcValueDifferenceAverage',
         value: function _calcValueDifferenceAverage(values, average) {
-            if (!Array.isArray(values) || isNaN(average) || !average) {
-                console.log(values);
-                throw new TypeError();
+            if (!Array.isArray(values)) {
+                throw new TypeError('The input data type of the first argument(values) should be an Array');
             }
+
+            if (isNaN(average) || !average) {
+                throw new TypeError('Parameter averages may not be NaN/null/undefined');
+            }
+
             return values.map(function (element) {
                 return element - average;
             });
@@ -106,7 +110,7 @@ var Correlation = function () {
          */
 
     }, {
-        key: "_calcMultiplyVector",
+        key: '_calcMultiplyVector',
         value: function _calcMultiplyVector(fVector, sVector) {
             return fVector.map(function (element, index) {
                 return element * sVector[index];
@@ -121,7 +125,7 @@ var Correlation = function () {
          */
 
     }, {
-        key: "_calcValueDifferenceAverageSquare",
+        key: '_calcValueDifferenceAverageSquare',
         value: function _calcValueDifferenceAverageSquare(values, average) {
             return Correlation._calcValueDifferenceAverage(values, average).map(function (element) {
                 return Math.pow(element, 2);
@@ -134,10 +138,10 @@ var Correlation = function () {
          */
 
     }, {
-        key: "_validateArray",
+        key: '_validateArray',
         value: function _validateArray(values) {
             if (!Array.isArray(values)) {
-                throw new TypeError();
+                throw new TypeError('The input data type must be Array');
             }
         }
     }]);

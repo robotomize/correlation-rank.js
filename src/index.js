@@ -55,10 +55,14 @@ export default class Correlation  {
      * @returns {number}
      */
     static _calcValueDifferenceAverage(values, average) {
-        if (!Array.isArray(values) || isNaN(average) || !average) {
-            console.log(values);
-            throw new TypeError;
+        if (!Array.isArray(values)) {
+            throw new TypeError('The input data type of the first argument(values) should be an Array');
         }
+
+        if (isNaN(average) || !average) {
+            throw new TypeError('Parameter averages may not be NaN/null/undefined');
+        }
+
         return values.map(element => element - average);
     }
 
@@ -89,7 +93,7 @@ export default class Correlation  {
      */
     static _validateArray(values) {
         if (!Array.isArray(values)) {
-            throw new TypeError;
+            throw new TypeError('The input data type must be Array');
         }
     }
 }
